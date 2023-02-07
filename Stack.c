@@ -5,7 +5,7 @@ int arr[10];
 int tos;
 };
 void push (struct stack *, int );
-int pop (struct stack *);
+int pop (struct stack *);    
 void peek();
 
 int main(){
@@ -57,9 +57,9 @@ printf("pushed element =%d",n);
 return;
 }
 
-int pop (struct stack *p){
+int pop (struct stack *p){   
 int x;
-if(p->tos>-1){
+if(p->tos<=-1){
     printf("\n STACK UNDERFLOW");
     return -1;
 }
