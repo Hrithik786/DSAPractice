@@ -1,6 +1,6 @@
 //Infix to Postfix
 #include<stdio.h>
-
+//#include<math.h>
 struct stack
 {
     float arr[10];
@@ -18,9 +18,9 @@ int main(){
     char postfix[20];
     float ans;
     printf("please enter correct Infix expression:\n");
-    scanf("%s",postfix);
+    scanf("%s",&postfix);
     ans=evaluate(postfix);
-    printf("answer is %f",ans);
+    printf("\nanswer is %f",ans);
     return 0;
 }
 
@@ -31,7 +31,7 @@ int i;
 char ch;
 float op1,op2,result;
 s.tos=-1;
-for ( i = 0; postfix !='\0'; i++)
+for ( i = 0; postfix[i] != '\0'; i++)
     {
         ch=postfix[i];
         if(isoperand(ch)==1)
@@ -54,7 +54,7 @@ int isoperand (char ch){
 }
 
 void push(struct stack *p,float f){
-if(p->tos>9){
+if(p->tos==10){
     printf("\nSTACK OVERFLOW");
     return;
 }
@@ -78,8 +78,8 @@ float calculate(float op1,float op2,char ch){
     case '-' : return (op1-op2);
     case '*': return (op1*op2);
     case '/': return (op1/op2);
-    case '%': return fmod(op1,op2);
-    case '$': return pow(op1,op2);   
+    //case '%': return modf((op1(double)),(op2(double)));
+    //case '$': return powf(op1,op2);   
     default: return 0.0;
     }
 }
