@@ -1,7 +1,7 @@
 #include<stdio.h>
 
 struct stack{
-int arr[10];
+int arr[5];
 int tos;
 };
 void push (struct stack *, int );
@@ -14,7 +14,7 @@ int main(){
     char ch;
     int x;
     a:
-    printf("\t hello please choose what do yo want to do \n1.push\n2.pop\n3.peek");
+    printf("\n hello please choose what do yo want to do \n1.push\n2.pop\n3.peek");
     scanf("%d",&ch);
     do{
     switch(ch)
@@ -47,7 +47,7 @@ int main(){
 return 0;
 }
 void push(struct stack *p, int n ){
-if(p->tos>=5){
+if(p->tos>5){
     printf("\nSTACK OVERFLOW");
     return;
 }
