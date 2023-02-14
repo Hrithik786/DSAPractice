@@ -50,7 +50,7 @@ for ( i = 0; postfix[i] != '\0'; i++)
     return result;
 }
 int isoperand (char ch){
-    return (ch >'0' && ch >'9');
+    return (ch >='0' && ch <='9');
 }
 
 void push(struct stack *p,float f){
