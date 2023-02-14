@@ -22,12 +22,40 @@ int main(){
 
     return 0;
 }
-void convert (char Infix[],char Postfix[]){
-
-
-
-    
+//--------------------------------------------------------------------------------
+void convert(char Infix[],char Postfix[]){
+struct stack s;
+s.tos=-1;
+char ch,opn;
+int i,j=0;
+int ans;
+for( i = 0; Infix[i]!='\0' ; i++)
+{
+    ch=Infix[i];
+    if (isOperand(ch)==1){
+        Postfix[j]=ch;
+        j++;
+    }else{
+            while(isEmpty(s)==0){
+                ans=prcd(ch,s.arr[s.tos]);
+                if(ans==1)
+                    break;
+            opn=pop(&s);
+            Postfix[j]=opn;
+            j++;                
+        }
+        push(&s,ch);
+        }
 }
+while (isEmpty(s)==0)
+{
+    opn=pop(&s);
+    Postfix[j]=opn;
+    j++;
+}
+Postfix[j]='\0';
+}
+//------------------------------------------------------------------------------------------
 int prcd(char op1,char op2){
 if (op2=='$')
     return 0;
