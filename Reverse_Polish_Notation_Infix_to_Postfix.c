@@ -17,7 +17,7 @@ int main(){
     
     char postfix[20];
     float ans;
-    printf("please enter correct Infix expression:\n");
+    printf("please enter correct POSTFIX expression:\n");
     scanf("%s",&postfix);
     ans=evaluate(postfix);
     printf("\nanswer is %f",ans);

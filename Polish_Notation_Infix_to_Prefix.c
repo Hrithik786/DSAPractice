@@ -19,10 +19,10 @@ int main(){
     
     char prefix[20];
     float ans;
-    printf("please enter correct Infix expression:\n");
+    printf("please enter correct Prefix expression:\n");
     scanf("%s",&prefix);
     ans=evaluate(prefix);
-    printf("\nanswer is %f",ans);
+    printf("\nanswer is %.2f",ans);
     return 0;
 }
 
@@ -33,7 +33,7 @@ int i;
 char ch;
 float op1,op2,result;
 s.tos=-1;
-for (i=strlen(prefix)-1; i>=0 ; i++)
+for (i=strlen(prefix)-1; i>=0 ; i--)
     {
         ch=prefix[i];
         if(isoperand(ch)==1)
