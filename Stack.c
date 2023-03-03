@@ -75,6 +75,3 @@ else
     printf("Empty stack");
     return ;
 }
-
-
-configure
