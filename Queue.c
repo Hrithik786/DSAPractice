@@ -1,9 +1,10 @@
 //Implementing Linear Queue (Static)
 
 #include<stdio.h>
+#define s 5
 
 struct Queue{
-    int arr[10];
+    int arr[s];
     int front,rear;
 };
 
@@ -12,8 +13,8 @@ int Dequeue(struct Queue *);
 
 int main(){
     struct Queue q;
-    q.front=-1;
-    q.rear=1;
+    q.front=0;
+    q.rear=-1;
     int ch,n;
 do{
     printf("\n1. Enqueue\n2. Dequeue\n");
@@ -28,7 +29,7 @@ do{
 
         case 2:
         n=Dequeue(&q);
-        if(n!=-1)
+        if(n!=0)
         printf("\n Dequeued Value is %d",n);
         break;
         
@@ -40,18 +41,19 @@ do{
 }
 
 void Enqueue(struct Queue *p, int n){
-if(p->rear==10){
+if(p->rear==s-1){
     printf("\nQueue Overflow");
     return ;
 }
 p->rear++;
 p->arr[p->rear]=n;
+printf("\nEnqueued Element is %d ",n);
 };
 
 int Dequeue(struct Queue *p){
-    if(p->front==-1){
+    if(p->front > p->rear){
         printf("\nQueue Underflow");
-        return -1;
+        return 0;
     }
     int n = p->arr[p->front];
     p->front+=1;
