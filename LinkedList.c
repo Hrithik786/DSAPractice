@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 struct node{
     int data;
@@ -21,41 +22,34 @@ int main()
     return 0;
 
 }
-void append(struct node **ps,int x)
-{
+void append(struct node **ps,int x){
 struct node *p,*temp;
 p=(struct node*)malloc(sizeof(struct node));
 if (p==NULL){
-    printf("insufficent Memory");
+    printf("\nInsufficent Memory");
     return;
 }
-
 p->data=x;
 p->next=NULL;
 
-if ((*ps)->next==NULL)
-{
-    (*ps)->next=p;
+if (*ps==NULL){
+    (*ps)=p;
     return;
 }
 temp=*ps;
-while (temp->next!=NULL)
-{
+while (temp->next!=NULL){
     temp=temp->next;
 }
 temp->next=p;
 }
 
 void display(struct node *p){
-if(p->next==NULL){
-    printf("Data =",p->data);
+if(p==NULL){
+    printf("List is Empty ");
     return;
 }
-struct node *temp=p;
-
-while(temp->next!=NULL){
-    printf("Data =",temp->data);
-    temp=temp->next;
+while(p->next!=NULL){
+    printf("\nData = %d",p->data);
+    p=p->next;
 }
-
 }
