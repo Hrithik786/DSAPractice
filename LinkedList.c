@@ -20,7 +20,7 @@ do{
     switch(ch)
     {
     case 1:
-    printf("\nPlease Enter element you want to Append\n");
+    printf("\nPlease Enter Element you want to Append\n");
     scanf(" %d",&x);
     append(&start,x);
     break;
