@@ -8,6 +8,7 @@ struct node{
 
 void append(struct node **, int);
 void display(struct node *);
+int searchnode(struct node *, int);
 
 int main()
 {
@@ -15,7 +16,7 @@ int main()
     struct node *start = NULL;
     
 do{
-    printf("\nHELLO BOSS\n\n\n1.Append\n2.Display\n");
+    printf("\nHELLO BOSS\n\n\n1.Append\n2.Display\n3.Search Position of Node\n");
     scanf(" %d",&ch);
     switch(ch)
     {
@@ -27,17 +28,39 @@ do{
 
     case 2:
     display(start);
-    ch=1;
+    ch=1;        //for looping
+    break;
+    
+    case 3:
+    printf("\nEnter a data which you wanna search\n");
+    scanf(" %d",&x);
+    x = searchnode(start,x);
+    printf("\nposition = %d",x); 
+    ch=1;     
     break;
 
     default:
     printf("\nPlease Enter Valid Input");
     break;
     }
-}while (ch!=2);
+}while (ch!=3);
 return 0;
 }
-
+int searchnode(struct node *p,int x){
+int c=0;
+if(p==NULL){
+    printf("\nList is Empty");
+    return c;
+}
+while (p!=NULL)
+{
+    c++;
+    if (p->data==x)
+    return c;    
+    p=p->next;
+}
+    return c;
+}
 void append(struct node **ps,int x){
 struct node *p,*temp;
 p=(struct node*)malloc(sizeof(struct node));
