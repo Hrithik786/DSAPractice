@@ -152,16 +152,19 @@ void addatpos(struct node **ps,int x,int pos){
     return;
     }
     int count=0;  //issues from here
-    struct node *prev,*temp=*ps;
-    while(count!=pos){
+    struct node *prev,*temp=NULL;
+    temp=*ps;
+    while(temp->next!=NULL){
         count++;
         prev=temp;
-        temp=temp->next;
-        }
         if (count==pos){
             prev->next=node;
             node->next=temp;
             printf("\nNode Added Successfully at Position %d",count);
-        }else        
+            return;
+        }
+        temp=temp->next;
+        } 
         printf("\nList is Small, Position not found, Add some nodes then try Again,Thank You!!");
+        return;
 }
