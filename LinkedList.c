@@ -133,7 +133,7 @@ temp=*ps;  //start->temp
 *ps=pre;  //start->new node
 pre->next=temp;//node ->connect ->linkedist
 printf("\nElement Added Successfully");
-free(temp);
+free(temp);//check it
 }
 void addatpos(struct node **ps,int x,int pos){
     struct node *node=(struct node*)malloc(sizeof(struct node));
@@ -146,12 +146,12 @@ void addatpos(struct node **ps,int x,int pos){
     node->next=NULL;
     if (*ps==NULL)
     {
-    printf("\n No Nodes Found in this List This is b'cause we are adding this Element as A First Node");
+    printf("\nNo Nodes Found in this List This is b'cause we are adding this Element as A First Node");
     *ps=node;
-    printf("\nElement Added Successfully =%d",(*ps)->data);
+    printf("\nElement Added Successfully = %d",(*ps)->data);
     return;
     }
-    int count=0;
+    int count=0;  //issues from here
     struct node *prev,*temp=*ps;
     while(temp->next!=NULL){
         count++;
@@ -160,9 +160,9 @@ void addatpos(struct node **ps,int x,int pos){
         {
             prev->next=node;
             node->next=temp;
-            printf("\nNode Added Successfully at Position %d",pos);
+            printf("\nNode Added Successfully at Position %d",count);
             return;
-        }
+        } //till here
         temp=temp->next;
         }
         printf("\nList is Small, Position not found, Add some nodes then try Again,Thank You!!");
