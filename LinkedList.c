@@ -18,7 +18,7 @@ int main()
     struct node *start = NULL;
     
 do{
-    printf("\nHELLO BOSS\n\n1.Append\n2.Display\n3.Search Position of Node\n4.Prepend\n");
+    printf("\nHELLO BOSS\n\n1.Append\n2.Display\n3.Search Position of Node\n4.Prepend\n5.Add at Position\n");
     scanf(" %d",&ch);
     switch(ch)
     {
