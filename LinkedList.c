@@ -10,10 +10,11 @@ void append(struct node **, int);
 void display(struct node *);
 int searchnode(struct node *, int);
 void prepend(struct node **,int);
+void addatpos(struct node**,int,int);
 
 int main()
 {
-    int ch,x;
+    int pos,ch,x;
     struct node *start = NULL;
     
 do{
@@ -44,6 +45,14 @@ do{
     printf("\nEnter a data which you wanna Add at First node\n");
     scanf(" %d",&x);
     prepend(&start,x);
+    ch=1;
+    break;
+
+    case 5:
+    pos=0;
+    printf("\nEnter a data as well as position (respectively) which you wanna Add\n");
+    scanf(" %d %d",&x,&pos);
+    addatpos(&start,x,pos);
     ch=1;
     break;
 
@@ -91,7 +100,6 @@ while (temp->next!=NULL){
 temp->next=p;
 printf("\nAppended Element  Successfully",temp->data);
 }
-
 void display(struct node *p){
 if(p==NULL){
     printf("List is Empty ");
@@ -105,8 +113,6 @@ while(p!=NULL){
     printf("\ncount nodes =  %d",c);
 }
 }
-
-
 void prepend(struct node **ps ,int x){
 struct node *temp,*pre = (struct node*)malloc(sizeof(struct node));
 if (pre==NULL)
@@ -128,4 +134,37 @@ temp=*ps;  //start->temp
 pre->next=temp;//node ->connect ->linkedist
 printf("\nElement Added Successfully");
 free(temp);
+}
+void addatpos(struct node **ps,int x,int pos){
+    struct node *node=(struct node*)malloc(sizeof(struct node));
+    if (node==NULL)
+    {
+        printf("\nInsufficient Memory");
+        return;
+    }
+    node->data=x;
+    node->next=NULL;
+    if (*ps==NULL)
+    {
+    printf("\n No Nodes Found in this List This is b'cause we are adding this Element as A First Node");
+    *ps=node;
+    printf("\nElement Added Successfully =%d",(*ps)->data);
+    return;
+    }
+    int count=0;
+    struct node *prev,*temp=*ps;
+    while(temp->next!=NULL){
+        count++;
+        prev=temp;
+        if (count==pos)
+        {
+            prev->next=node;
+            node->next=temp;
+            printf("\nNode Added Successfully at Position %d",pos);
+            return;
+        }
+        temp=temp->next;
+        }
+        printf("\nList is Small, Position not found, Add some nodes then try Again,Thank You!!");
+        return;
 }
