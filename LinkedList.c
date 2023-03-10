@@ -15,7 +15,7 @@ void prepend(struct node **,int);     //Time_complexity O(1)
 void addatpos(struct node **,int,int); //Time_complexity O(n)
 void delfirst(struct node **);        //Time_complexity O(1)
 void dellast(struct node **);          //Time_complexity O(n)
-int delatpos(struct node **,int);      //Time_complexity O(n)
+void delatpos(struct node **,int);      //Time_complexity O(n)
 
 
 int main()
@@ -24,7 +24,7 @@ int main()
     struct node *start = NULL;
     
 do{
-    printf("\n\n*********************HELLO BOSS*******************\n\n1.Append\n2.Display\n3.Search Position of Node\n4.Prepend\n5.Add at Position\n6.Delete_First_node\n7.Delete_Last_Node\n8.Add_at_Position\n");
+    printf("\n\n*********************HELLO BOSS*******************\n\n1.Append\n2.Display\n3.Search Position of Node\n4.Prepend\n5.Add at Position\n6.Delete_First_node\n7.Delete_Last_Node\n8.Delete_Node which data part matches\n$$ 9 to terminate\n");
     scanf(" %d",&ch);
     switch(ch)
     {
@@ -73,7 +73,14 @@ do{
     break;
     
     case 8:
+    printf("\nPlease enter a value which node you want to delete ");
+    scanf(" %d",&x);
+    delatpos(&start,x);
     ch=1;
+    break;
+
+    case 9:
+    ch=8;
     break;
 
     default:
@@ -134,13 +141,13 @@ while(p!=NULL){
 }
 }
 void prepend(struct node **ps ,int x){
-struct node *temp,*pre = (struct node*)malloc(sizeof(struct node));
+struct node *temp,*pre;
+pre = (struct node*)malloc(sizeof(struct node));
 if (pre==NULL)
 {
     printf("\nInsufficient Memory");
     return;
 }
-
 pre->next=NULL;
 pre->data=x;
 
@@ -149,11 +156,10 @@ if(*ps==NULL){
     printf("\nElement Added Sucessfully = %d",(*ps)->data);
     return;
 }
-temp=*ps;  //start->temp
-*ps=pre;  //start->new node
+temp=(*ps);  //start->temp
+(*ps)=pre;  //start->new node
 pre->next=temp;//node ->connect ->linkedist
 printf("\nElement Added Successfully");
-free(temp);//check it
 }
 void addatpos(struct node **ps,int x,int pos){
     struct node *node=(struct node*)malloc(sizeof(struct node));
@@ -214,5 +220,52 @@ void dellast(struct node **ps){
     }
     free(temp);
     prev->next=NULL;   
-    printf("\nLast Element Deleted Successfully = %d",(temp->data));
+    printf("\nLast Element Deleted Successfully");
+}
+void delatpos(struct node **ps ,int x){
+    if(*ps==NULL){
+        printf("\nList is Empty");
+        return;
+    }
+    if((*ps)->next==NULL){
+        if((*ps)->data==x){
+            free(*ps);
+            *ps=NULL;
+            printf("\nElement Deleted Successfully");
+            return;
+        }
+        printf("\nNode Not Found!!!");
+        return;
+    }
+    struct node *prev,*temp;
+    temp=*ps;
+    while (temp!=NULL && temp->data!=x)
+    {
+        prev=temp;
+        temp=temp->next;
+    }
+    if(temp==NULL){
+        printf("\nNode Not Found!!!");
+    }
+    else{
+        prev->next=temp->next;
+        free(temp);
+        printf("\nElement Deleted Successfully");
+    }
+    
+/*
+    temp=*ps;
+    while (temp!=NULL)
+    {
+        prev=temp;
+        if(temp->data==x){
+            prev->next=temp->next;
+            free(temp);
+            printf("\nElement Deleted Successfully");
+            return;
+            }
+        temp=temp->next;
+    }
+    printf("\nNode Not Found!!!");//second way
+  */  
 }
