@@ -59,24 +59,20 @@ do{
     printf("\nEnter a data as well as position (respectively) which you wanna Add\n");
     scanf(" %d %d",&x,&pos);
     addatpos(&start,x,pos);
-    ch=1;
     break;
 
     case 6:
     delfirst(&start);
-    ch=1;
     break;
     
     case 7:
     dellast(&start);   
-    ch=1;
     break;
     
     case 8:
     printf("\nPlease enter a value which node you want to delete ");
     scanf(" %d",&x);
     delatpos(&start,x);
-    ch=1;
     break;
 
     case 9:
@@ -88,6 +84,7 @@ do{
     break;
     }
 }while (ch!=8);
+
 return 0;
 }
 int searchnode(struct node *p,int x){
