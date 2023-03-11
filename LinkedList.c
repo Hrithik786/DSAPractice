@@ -260,20 +260,19 @@ void insert(struct node **ps, int x){
         return;
     }
     node->data=x;
-    node->next=NULL;
     if(*ps==NULL){
         *ps=node;
+        node->next=NULL;
         printf("\nNode Inserted Successfully");
         return;
     }
-    struct node *temp;
     if(x < (*ps)->data){
         node->next=*ps;
         *ps=node;
         printf("\nNode Inserted Successfully");
         return;
     }
-    struct node *prev=NULL;
+    struct node *temp,*prev=NULL;
     temp=*ps;
     while (temp!=NULL && temp->data < x){
         prev=temp;
@@ -282,11 +281,12 @@ void insert(struct node **ps, int x){
     if (temp==NULL)
     {   
         temp->next=node;
+        node->next=NULL;
         printf("\nElement Inserted Successfully");
-        return;
-    }else{
+    }
+    else{
         prev->next=node;
         node->next=temp;
-        //display(*ps);
+        printf("\nElement Inserted Successfully");
     }
 }
