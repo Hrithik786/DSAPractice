@@ -10,13 +10,12 @@ struct node{
 
 void append(struct node **, int);    //Time_complexity O(n)
 void display(struct node *);
-int searchnode(struct node *, int); //Time_complexity O(n) by implementing searching algo we reduce its Time Complexity
+int searchnode(struct node *, int); //Time_complexity O(n) we can't reduce its Time Complexity
 void prepend(struct node **,int);     //Time_complexity O(1)
 void addatpos(struct node **,int,int); //Time_complexity O(n)
 void delfirst(struct node **);        //Time_complexity O(1)
 void dellast(struct node **);          //Time_complexity O(n)
 void delatpos(struct node **,int);      //Time_complexity O(n)
-
 
 int main()
 {
@@ -36,7 +35,6 @@ do{
 
     case 2:
     display(start);
-    ch=1;        //for looping
     break;
     
     case 3:
@@ -44,14 +42,12 @@ do{
     scanf(" %d",&x);
     x = searchnode(start,x);
     printf("\nposition = %d",x); 
-    ch=1;     
     break;
 
     case 4:
     printf("\nEnter a data which you wanna Add at First node\n");
     scanf(" %d",&x);
     prepend(&start,x);
-    ch=1;
     break;
 
     case 5:
@@ -73,6 +69,7 @@ do{
     printf("\nPlease enter a value which node you want to delete ");
     scanf(" %d",&x);
     delatpos(&start,x);
+    ch=1;
     break;
 
     case 9:
@@ -100,7 +97,8 @@ while (p!=NULL)
     return c;    
     p=p->next;
 }
-    return c;
+printf("\nNode Not Found!!!");
+return c;
 }
 void append(struct node **ps,int x){
 struct node *p,*temp;
@@ -131,10 +129,9 @@ if(p==NULL){
 }
 int c=0;
 while(p!=NULL){
-    printf("\nData = %d",p->data);
-    p=p->next;
     c++;
-    printf("\ncount nodes =  %d",c);
+    printf("\nData = %d, position = %d",p->data,c);
+    p=p->next;
 }
 }
 void prepend(struct node **ps ,int x){
@@ -167,29 +164,29 @@ void addatpos(struct node **ps,int x,int pos){
     }
     node->data=x;
     node->next=NULL;
-    if (*ps==NULL)
-    {
+    if (*ps==NULL){
     printf("\nNo Nodes Found in this List This is b'cause we are adding this Element as A First Node");
     *ps=node;
     printf("\nElement Added Successfully = %d",(*ps)->data);
     return;
     }
-    int count=0;  //issues from here
-    struct node *prev,*temp=NULL;
+    int count=0;  
+    struct node *temp,*prev=NULL;
     temp=*ps;
-    while(temp->next!=NULL){
+    while(temp!=NULL && pos!=count){//issues from here
         count++;
         prev=temp;
+        temp=temp->next;
+        }
         if (count==pos){
             prev->next=node;
             node->next=temp;
             printf("\nNode Added Successfully at Position %d",count);
             return;
+        }else{
+            printf("\nList is Small, Position not found, Add some nodes then try Again,Thank You!!");
+            return;
         }
-        temp=temp->next;
-        } 
-        printf("\nList is Small, Position not found, Add some nodes then try Again,Thank You!!");
-        return;
 }
 void delfirst(struct node **ps){
     struct node *temp;
@@ -250,19 +247,4 @@ void delatpos(struct node **ps ,int x){
         printf("\nElement Deleted Successfully");
     }
     
-/*
-    temp=*ps;
-    while (temp!=NULL)
-    {
-        prev=temp;
-        if(temp->data==x){
-            prev->next=temp->next;
-            free(temp);
-            printf("\nElement Deleted Successfully");
-            return;
-            }
-        temp=temp->next;
-    }
-    printf("\nNode Not Found!!!");//second way
-  */  
 }
