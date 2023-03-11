@@ -8,14 +8,15 @@ struct node{
     struct node *next; //self referential structure
 };
 
+void insert(struct node **,int);     //Time Complexity O(n)  insert element in sorted way  
 void append(struct node **, int);    //Time_complexity O(n)
 void display(struct node *);
-int searchnode(struct node *, int); //Time_complexity O(n) we can't reduce its Time Complexity
+int searchnode(struct node *, int);   //Time_complexity O(n) we can't reduce its Time Complexity
 void prepend(struct node **,int);     //Time_complexity O(1)
 void addatpos(struct node **,int,int); //Time_complexity O(n)
-void delfirst(struct node **);        //Time_complexity O(1)
+void delfirst(struct node **);         //Time_complexity O(1)
 void dellast(struct node **);          //Time_complexity O(n)
-void delatpos(struct node **,int);      //Time_complexity O(n)
+void delatpos(struct node **,int);     //Time_complexity O(n)
 
 int main()
 {
@@ -23,7 +24,7 @@ int main()
     struct node *start = NULL;
     
 do{
-    printf("\n\n*********************HELLO BOSS*******************\n\n1.Append\n2.Display\n3.Search Position of Node\n4.Prepend\n5.Add at Position\n6.Delete_First_node\n7.Delete_Last_Node\n8.Delete_Node which data part matches\n$$ 9 to terminate\n");
+    printf("\n\n**********HELLO BOSS***********\n\n1.Append\n2.Display\n3.Search Position of Node\n4.Prepend\n5.Add at Position\n6.Delete_First_node\n7.Delete_Last_Node\n8.Delete_Node which data part matches\n9.Insert Element that List remains Sorted\n$$ 10 to terminate\n");
     scanf(" %d",&ch);
     switch(ch)
     {
@@ -69,18 +70,22 @@ do{
     printf("\nPlease enter a value which node you want to delete ");
     scanf(" %d",&x);
     delatpos(&start,x);
-    ch=1;
     break;
 
     case 9:
-    ch=8;
+    printf("\nPlease Enter a Element which You wanna Insert\n");
+    scanf(" %d",&x);
+    insert(&start,x);
+    break;
+    
+    case 10:
     break;
 
     default:
     printf("\nPlease Enter Valid Input");
     break;
     }
-}while (ch!=8);
+}while (ch!=10);
 
 return 0;
 }
@@ -247,4 +252,41 @@ void delatpos(struct node **ps ,int x){
         printf("\nElement Deleted Successfully");
     }
     
+}
+void insert(struct node **ps, int x){
+    struct node *node = (struct node*)malloc(sizeof(struct node));
+    if(node==NULL){
+        printf("\nInsufficient Memory");
+        return;
+    }
+    node->data=x;
+    node->next=NULL;
+    if(*ps==NULL){
+        *ps=node;
+        printf("\nNode Inserted Successfully");
+        return;
+    }
+    struct node *temp;
+    if(x < (*ps)->data){
+        node->next=*ps;
+        *ps=node;
+        printf("\nNode Inserted Successfully");
+        return;
+    }
+    struct node *prev=NULL;
+    temp=*ps;
+    while (temp!=NULL && temp->data < x){
+        prev=temp;
+        temp=temp->next;
+    }
+    if (temp==NULL)
+    {   
+        temp->next=node;
+        printf("\nElement Inserted Successfully");
+        return;
+    }else{
+        prev->next=node;
+        node->next=temp;
+        //display(*ps);
+    }
 }
