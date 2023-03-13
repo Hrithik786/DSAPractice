@@ -1,3 +1,5 @@
+//Implementing Dynamic Stack
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -19,7 +21,7 @@ int main(){
     peek(tos);
     
     while(tos!=NULL)
-    printf("\npopped element = %d",pop(&tos));
+    printf("\npopped element = %d",pop(&tos)>0);
 
     return 0;
 }

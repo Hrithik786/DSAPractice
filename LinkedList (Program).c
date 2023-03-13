@@ -11,7 +11,7 @@ struct node{
 void insert(struct node **,int);     //Time Complexity O(n)  insert element in sorted way  
 void append(struct node **, int);    //Time_complexity O(n)
 void display(struct node *);
-int searchnode(struct node *, int);   //Time_complexity O(n) we can't reduce its Time Complexity
+int searchnode(struct node *, int);   //Time_complexity O(n) 
 void prepend(struct node **,int);     //Time_complexity O(1)
 void addatpos(struct node **,int,int); //Time_complexity O(n)
 void delfirst(struct node **);         //Time_complexity O(1)
