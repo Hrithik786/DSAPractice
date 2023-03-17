@@ -1,4 +1,6 @@
 //Singly LinkedList Program
+//please run it on your IDE
+//so that you may see the OUTPUT
 
 #include<stdio.h>
 #include<stdlib.h>

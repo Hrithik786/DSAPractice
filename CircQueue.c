@@ -1,3 +1,7 @@
+//Implementing Circular Queue
+//please run it on your IDE
+//so that you may see the OUTPUT
+
 #include<stdio.h>
 #define s 5
 
@@ -8,6 +12,7 @@ struct CQueue{
 
 void Enqueue(struct CQueue *,int);
 int Dequeue(struct CQueue *);
+void display(struct CQueue);
 
 int main(){
     struct CQueue q;
@@ -15,7 +20,7 @@ int main(){
     q.front=q.rear=-1;
     
 do{ 
-    printf("\n1. Enqueue \n2. Dequeue\n");
+    printf("\n1. Enqueue \n2. Dequeue\n3. Display\n");
     scanf(" %d",&ch);
     switch (ch)
     {
@@ -29,6 +34,10 @@ do{
     x=Dequeue(&q);
     if(x!=-1)
     printf("\nDequeued Element =%d",x);
+    break;
+
+    case 3:
+    display(q);
     ch=1;
     break;
 
@@ -36,7 +45,7 @@ do{
     printf("Please Enter Valid Input");
     break;
     }
-}while (ch!=2);
+}while (ch!=3);
 
     return 0;
 }
@@ -55,7 +64,7 @@ void Enqueue(struct CQueue *p, int n){
         p->rear=(p->rear+1)%s;
         p->arr[p->rear]=n;
         printf("\nEnqueued Element  = %d",n);
-         }
+        }
 }
 int Dequeue(struct CQueue *p){
     int y;
@@ -78,4 +87,14 @@ int Dequeue(struct CQueue *p){
         return y;
         }
         
+}
+void display(struct CQueue q){
+    if(q.front==-1){
+        printf("\nQueue is Empty");
+        return;
+    }
+    do{
+        printf("\n %d \n",q.arr[q.front]);
+        q.front=(q.front+1)%s;
+    }while(q.front!=q.rear);
 }
