@@ -14,14 +14,36 @@ void peek(struct stack *);
 
 int main(){
     struct stack *tos=NULL;
-    push(&tos, 10);
-    push(&tos,-98);
-    push(&tos,780);
-    push(&tos,50);
-    peek(tos);
-    
-    while(tos!=NULL)
-    printf("\npopped element = %d",pop(&tos)>0);
+    int ch,x;
+    do
+    {
+        printf("\nWelcome Boss!! please enter what you wanna do:\n");
+        printf("\n1.Push\n2.Pop\n3.Peek\n");
+        scanf(" %d",&ch);
+        switch (ch)
+        {
+        case 1:
+        printf("\nEnter Element to Push:");
+        scanf(" %d",&x);
+        push(&tos,x);
+        break;
+
+        case 2:
+        x=pop(&tos);
+        if (x!=-1)
+        printf("\nPopped element = %d ",x);        
+        break;
+
+        case 3:
+        peek(tos);
+        ch=1;
+        break;
+        
+        default:
+        printf("\nPlease Enter Valid Input!!Try Again");
+        break;
+        }
+    } while (ch!=3);
 
     return 0;
 }
@@ -60,6 +82,6 @@ void peek(struct stack *ptos){
         printf("\nStack is Empty");
         return;
     }
-    printf("\nData = %d ",ptos->data);
+    printf("\nTop Element = %d ",ptos->data);
     return;  
 }
