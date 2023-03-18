@@ -1,3 +1,6 @@
+//Implementing Dynamic Queue
+//please run it on your IDE
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -14,21 +17,41 @@ void display(struct Queue *,struct Queue *);
 int main(){
     struct Queue *front,*rear;
     front=rear=NULL;
-    int x;
+    int x,ch;
+    do
+    {
+        printf("\nHello Boss!!\n1.Enqueue\n2.Dequeue\n3.Display\n");
+        scanf(" %d",&ch);
+        
+        switch (ch)
+        {
+        case 1:
+        printf("\nEnter Element What you wanna Insert ");
+        scanf(" %d",&x);
+        enqueue(&front,&rear,x);
+        break;
+        
+        case 2:
+        x=dequeue(&front,&rear);
+        if(x!=-1)
+        printf("\nDequeued Element = %d ",x);
+        break;
+        
+        case 3:
+        display(front,rear);
+        ch=1;
+        break;
 
-    enqueue(&front,&rear,6358);
-    enqueue(&front,&rear,50);
-    enqueue(&front,&rear,90);
-    enqueue(&front,&rear,250);
+        default:
+        printf("\nInvalid Input");
+        break;
+
+        }
+    } while (ch!=3);
     
-    display(front,rear);
-
-    x=dequeue(&front,&rear);
-    if(x!=-1)
-    printf("\nDequeued Element = %d ",x);
-
     return 0;
 }
+
 void enqueue(struct Queue **pf,struct Queue **pr,int y){
     struct Queue *p = (struct Queue*)malloc(sizeof(struct Queue));
     if (p==NULL)
@@ -41,7 +64,7 @@ void enqueue(struct Queue **pf,struct Queue **pr,int y){
 
     if (*pr==NULL){
         *pf=*pr=p;
-        printf("\nFirst Element Inserted Successfully");
+        printf("\nFirst Element Inserted Successfully %d",(*pr)->data);
         return;
     }
     (*pr)->next=p;
