@@ -31,6 +31,7 @@ do{
         n=Dequeue(&q);
         if(n!=0)
         printf("\n Dequeued Value is %d",n);
+        ch=1;
         break;
         
         default: printf("\nPlease Enter Valid Input");
