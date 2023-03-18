@@ -9,6 +9,7 @@ struct Queue
 
 void enqueue(struct Queue **, struct Queue **,int);
 int dequeue(struct Queue **, struct Queue **);
+void display(struct Queue *,struct Queue *);
 
 int main(){
     struct Queue *front,*rear;
@@ -19,10 +20,12 @@ int main(){
     enqueue(&front,&rear,50);
     enqueue(&front,&rear,90);
     enqueue(&front,&rear,250);
+    
+    display(front,rear);
 
     x=dequeue(&front,&rear);
+    if(x!=-1)
     printf("\nDequeued Element = %d ",x);
-
 
     return 0;
 }
@@ -38,11 +41,12 @@ void enqueue(struct Queue **pf,struct Queue **pr,int y){
 
     if (*pr==NULL){
         *pf=*pr=p;
-        printf("\nElement Inserted");
+        printf("\nFirst Element Inserted Successfully");
         return;
     }
     (*pr)->next=p;
     *pr=p;
+    printf("\nElement Inserted %d",(*pr)->data);
 }
 int dequeue(struct Queue **pf,struct Queue **pr){
     int x;
@@ -61,4 +65,14 @@ int dequeue(struct Queue **pf,struct Queue **pr){
     *pf=(*pf)->next;
     free(p);
     return x;
+}
+void display(struct  Queue *f,struct Queue *r){
+    if(f==NULL){
+        printf("\nQueue is Empty");
+        return;
+    }
+    do{
+        printf("\nData = %d",f->data);
+        f=f->next;
+    }while (f!=r);
 }
