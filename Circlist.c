@@ -38,10 +38,11 @@ void append(struct doubly **phead,int x){
         return;
     }
     struct doubly *temp=*phead; //for traversing
-    while (temp->next!=*phead)
-    {
+    
+    while (temp->next!=*phead){
     temp=temp->next;       
     }
+
     temp->next=p;
     p->next=*phead;
     printf("\nAppended %d Successfully ",temp->data);
@@ -58,6 +59,6 @@ do
 {
     printf("\n data = %d",temp->data);
     temp=temp->next;
-} while (temp!=NULL);
+} while (temp!=phead);
 
 }
