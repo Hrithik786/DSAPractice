@@ -50,7 +50,7 @@ int main(){
 void push(struct stack **ptos,int x){
     struct stack *p = (struct stack *)malloc(sizeof(struct stack));
     if (p==NULL){
-        printf("\nInsufficient Memory");
+        printf("\nStack Overflow");
         return;
     }
     p->data=x;
