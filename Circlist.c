@@ -12,14 +12,33 @@ void append(struct doubly **,int);
 void display(struct doubly *);
 
 int main(){
-    int x;
+    int x,ch;
     struct doubly *head=NULL;
 
-    append(&head,1625);
-    append(&head,1750);
-    append(&head,1785);
-    append(&head,100);
-    display(head);
+    do
+    {
+        printf("\nHello Boss Enter Element what you wanna do\n");
+        printf("1.Append\n2.display\n");
+        scanf(" %d",&ch);
+
+        switch (ch)
+        {
+        case 1:
+            printf("\nEnter Element to Append\n");
+            scanf(" %d",&x);
+            append(&head,x);
+            break;
+        
+        case 2:
+        display(head);
+        break;
+
+        default:
+        printf("\nInvalid Input");
+            break;
+        }
+    } while (ch!=3);
+    
     return 0;
 
 }
@@ -38,9 +57,10 @@ void append(struct doubly **phead,int x){
         return;
     }
     struct doubly *temp=*phead; //for traversing
-    
+    int count=0;
     while (temp->next!=*phead){
     temp=temp->next;       
+    printf("count %d \n",count++);
     }
 
     temp->next=p;
