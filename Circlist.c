@@ -1,4 +1,5 @@
 //Implementing Circular LinkedList
+//Hello Boss run it on your IDE please 
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,6 +11,10 @@ struct doubly{
 
 void append(struct doubly **,int);
 void display(struct doubly *);
+void delfirst(struct doubly **);
+//dellast
+//delany which should accecpt int as argument
+//insert list always remains Sorted
 
 int main(){
     int x,ch;
@@ -18,7 +23,7 @@ int main(){
     do
     {
         printf("\nHello Boss Enter Element what you wanna do\n");
-        printf("1.Append\n2.display\n");
+        printf("1.Append\n2.Display\n3.Del_first\n");
         scanf(" %d",&ch);
 
         switch (ch)
@@ -31,6 +36,11 @@ int main(){
         
         case 2:
         display(head);
+        break;
+        
+        case 3:
+        delfirst(&head);
+        ch=1;
         break;
 
         default:
@@ -60,7 +70,7 @@ void append(struct doubly **phead,int x){
     int count=0;
     while (temp->next!=*phead){
     temp=temp->next;       
-    printf("count %d \n",count++);
+    printf("count %d \n",count++);//for checking loop is iterating or not
     }
 
     temp->next=p;
@@ -80,5 +90,14 @@ do
     printf("\n data = %d",temp->data);
     temp=temp->next;
 } while (temp!=phead);
-
+}
+void delfirst(struct doubly **ph){
+if(*ph==NULL){
+    printf("\nList is Empty");
+    return;
+}
+struct doubly *p=*ph;
+*ph=(*ph)->next;
+free(p);
+printf("\nFirst Node Removed Successfully");
 }
