@@ -19,6 +19,9 @@ void addatpos(struct node **,int,int); //Time_complexity O(n)
 void delfirst(struct node **);         //Time_complexity O(1)
 void dellast(struct node **);          //Time_complexity O(n)
 void delatpos(struct node **,int);     //Time_complexity O(n)
+//print Reverse linear list
+//reverse Linear
+
 
 int main()
 {
