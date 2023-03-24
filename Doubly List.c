@@ -1,4 +1,5 @@
 //Implementing Doubly linked list
+//hello BOSS !!! please run it on your IDE
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -12,22 +13,48 @@ struct doubly{
 void append(struct doubly **,int);
 void display(struct doubly*);
 void delfirst(struct doubly **);
-void delany(struct doubly **,int);
+//void delany(struct doubly **,int);
 void dellast(struct doubly **);
 
 int main(){
     struct doubly *head=NULL;
+    int ch,x;
+    do
+    {
+        printf("\nHello BOSS!!! Enter what you want");
+        printf("\n1.Append\n2.Display\n3.Delfirst\n4.DelAny(under maintainance)\n5.Dellast\n");
+        scanf(" %d",&ch);
+        switch (ch)
+        {
+            case 1:
+            printf("\nEnter a value to append:\n");
+            scanf(" %d",&x);
+            append(&head,x);
+            break;
 
-    append(&head,-9656);
-    append(&head,110);
-    append(&head,20);
-    append(&head,80);
-    display(head);
-    delfirst(&head);
-    display(head);
-    dellast(&head);
-    display(head);
-    main();
+            case 2:
+            display(head);
+            break;
+
+            case 3:
+            delfirst(&head);
+            break;
+
+            case 4:
+            //delany(&head);
+            break;
+
+            case 5:
+            dellast(&head);
+            ch=1;
+            break;
+
+        default:
+        printf("\nInvalid Input!!! please try Again");
+            break;
+        }
+    } while (ch!=5);
+    
     return 0;
 
 }
@@ -35,19 +62,17 @@ void append(struct doubly **ph,int x){
     struct doubly *p = (struct doubly *)malloc(sizeof(struct doubly));
     p->data=x;
     p->next=NULL; 
-    p->prev=NULL; //preventing from becoming Dangling pointer
-    int count=0;
-
+    p->prev=NULL; //preventing from becoming Dangling pointe
     if (*ph==NULL){
         *ph=p;
-        printf("\nFirst Node added Successfully, Node = %d",count++);
+        printf("\nFirst Node added Successfully");
         return;
     }
     struct doubly *temp;
     for (temp=*ph ; temp->next!=NULL ; temp=temp->next); //traversing
     p->prev=temp;
     temp->next=p;
-    printf("\nNode Added Successfully %d, Node = %d ",p->data,count++);    
+    printf("\nNode Added Successfully %d",p->data);    
 }
 void display(struct doubly *ph){
     if (ph==NULL)
@@ -77,9 +102,17 @@ void dellast(struct doubly **ph){
         printf("\nDoubly is Empty");
         return;
     }
-    for (;ph!=NULL;*ph=(*ph)->next);  // traversing
-    struct doubly *p=(*ph)->prev;    //temp pointer for storing prev node address
+    if ((*ph)->next==NULL)
+    {
+        free(*ph);
+        *ph=NULL;
+        printf("\nLast Element Deleted Successfully");
+        return;
+    }
+    struct doubly *p,*t;
+    for (t=*ph ; t->next!=NULL ; t=t->next);  // traversing
+    p=t->prev;    //temp pointer for storing prev node address
     p->next=NULL;  //initialising NULL to previous node
-    free(*ph);
+    free(t);
     printf("\nLast Element Deleted Successfully");
 }
