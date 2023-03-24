@@ -4,26 +4,26 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct doubly{
+struct circ{
     int data;
-    struct doubly *next;     
+    struct circ *next;     
 };
 
-void append(struct doubly **,int);
-void display(struct doubly *);
-void delfirst(struct doubly **);
-//dellast
+void append(struct circ **,int);
+void display(struct circ *);
+void delfirst(struct circ **);
+void dellast(struct circ **);
 //delany which should accecpt int as argument
 //insert list always remains Sorted
 
 int main(){
     int x,ch;
-    struct doubly *head=NULL;
+    struct circ *head=NULL;
 
     do
     {
         printf("\nHello Boss Enter Element what you wanna do\n");
-        printf("1.Append\n2.Display\n3.Del_first\n");
+        printf("1.Append\n2.Display\n3.Del_first\n4.dellast\n");
         scanf(" %d",&ch);
 
         switch (ch)
@@ -40,21 +40,24 @@ int main(){
         
         case 3:
         delfirst(&head);
-        ch=1;
+        break;
+
+        case 4:
+        dellast(&head);
         break;
 
         default:
         printf("\nInvalid Input");
             break;
         }
-    } while (ch!=3);
+    } while (ch!=5);
     
     return 0;
 
 }
 
-void append(struct doubly **phead,int x){
-    struct doubly *p=(struct doubly *)malloc(sizeof(struct doubly));
+void append(struct circ **phead,int x){
+    struct circ *p=(struct circ *)malloc(sizeof(struct circ));
     if(p==NULL){
         printf("\nInsufficient Memory");
         return;
@@ -66,7 +69,7 @@ void append(struct doubly **phead,int x){
         p->next=p;  //we are initialising 1st node next with its address
         return;
     }
-    struct doubly *temp=*phead; //for traversing
+    struct circ *temp=*phead; //for traversing
     int count=0;
     while (temp->next!=*phead){
     temp=temp->next;       
@@ -78,26 +81,47 @@ void append(struct doubly **phead,int x){
     printf("\nAppended %d Successfully ",temp->data);
 
 }
-void display(struct doubly *phead){
+void display(struct circ *phead){
     if (phead==NULL)
     {
         printf("\nList is Empty");
         return;
     }
-    struct doubly *temp=phead;
+    struct circ *temp=phead;
 do
 {
     printf("\n data = %d",temp->data);
     temp=temp->next;
 } while (temp!=phead);
 }
-void delfirst(struct doubly **ph){
+void delfirst(struct circ **ph){
 if(*ph==NULL){
     printf("\nList is Empty");
     return;
 }
-struct doubly *p=*ph;
+struct circ *p=*ph;
 *ph=(*ph)->next;
 free(p);
 printf("\nFirst Node Removed Successfully");
+}
+void dellast(struct circ **ph){
+if (*ph==NULL)
+{
+    printf("\nList is Empty");
+    return;
+}
+if ((*ph)->next==*ph)
+{
+    free(*ph);
+    *ph=NULL;
+    printf("\nElement Deleted Succesfully");
+}
+struct circ *prev,*temp;
+for (temp=*ph;temp->next!=*ph; temp=temp->next)
+{
+    prev=temp;
+}
+free(temp);
+prev->next=*ph;
+printf("\nElement Deleted Successfully");
 }
