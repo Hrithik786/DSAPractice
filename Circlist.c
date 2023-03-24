@@ -44,13 +44,14 @@ int main(){
 
         case 4:
         dellast(&head);
+        ch=1;
         break;
 
         default:
         printf("\nInvalid Input");
             break;
         }
-    } while (ch!=5);
+    } while (ch!=4);
     
     return 0;
 
@@ -99,28 +100,35 @@ if(*ph==NULL){
     printf("\nList is Empty");
     return;
 }
-struct circ *p=*ph;
+if ((*ph)->next==*ph)   //handling first element
+{
+    free(*ph);
+    *ph=NULL;
+    printf("\nFirst Node deleted successfully");
+    return;
+}
+struct circ *p=*ph;   //temp for storing address of head
 *ph=(*ph)->next;
 free(p);
 printf("\nFirst Node Removed Successfully");
 }
 void dellast(struct circ **ph){
-if (*ph==NULL)
+if (*ph==NULL)  //checking wheater the list have nodes or Empty
 {
     printf("\nList is Empty");
     return;
 }
-if ((*ph)->next==*ph)
+if ((*ph)->next==*ph)   //handling first node
 {
     free(*ph);
     *ph=NULL;
     printf("\nElement Deleted Succesfully");
 }
 struct circ *prev,*temp;
-for (temp=*ph;temp->next!=*ph; temp=temp->next)
-{
+
+for (temp=*ph;temp->next!=*ph; temp=temp->next)   //traversing to reach last node
     prev=temp;
-}
+
 free(temp);
 prev->next=*ph;
 printf("\nElement Deleted Successfully");
