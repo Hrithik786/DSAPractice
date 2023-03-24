@@ -4,20 +4,20 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct doubly{
-    struct doubly *prev;
+struct circ{
+    struct circ *prev;
     int data;
-    struct doubly *next;
+    struct circ *next;
 };
 
-void append(struct doubly **,int);
-void display(struct doubly*);
-void delfirst(struct doubly **);
+void append(struct circ **,int);
+void display(struct circ*);
+void delfirst(struct circ **);
 //void delany(struct doubly **,int);
-void dellast(struct doubly **);
+void dellast(struct circ **);
 
 int main(){
-    struct doubly *head=NULL;
+    struct circ *head=NULL;
     int ch,x;
     do
     {
@@ -58,8 +58,8 @@ int main(){
     return 0;
 
 }
-void append(struct doubly **ph,int x){
-    struct doubly *p = (struct doubly *)malloc(sizeof(struct doubly));
+void append(struct circ **ph,int x){
+    struct circ *p = (struct circ *)malloc(sizeof(struct circ));
     p->data=x;
     p->next=NULL; 
     p->prev=NULL; //preventing from becoming Dangling pointe
@@ -68,13 +68,13 @@ void append(struct doubly **ph,int x){
         printf("\nFirst Node added Successfully");
         return;
     }
-    struct doubly *temp;
+    struct circ *temp;
     for (temp=*ph ; temp->next!=NULL ; temp=temp->next); //traversing
     p->prev=temp;
     temp->next=p;
     printf("\nNode Added Successfully %d",p->data);    
 }
-void display(struct doubly *ph){
+void display(struct circ *ph){
     if (ph==NULL)
     {
         printf("\nDoubly is Empty");
@@ -86,18 +86,18 @@ void display(struct doubly *ph){
         ph=ph->next;
     } 
 }
-void delfirst(struct doubly **ph){
+void delfirst(struct circ **ph){
     if (*ph==NULL){
         printf("\nDoubly is Empty");
         return;
     }
-    struct doubly *p=*ph;
+    struct circ *p=*ph;
     *ph=(*ph)->next;
     (*ph)->prev=NULL; //preventing from becoming dangling pointer
     free(p);
     printf("\nFirst Node deleted Successfully");
 }
-void dellast(struct doubly **ph){
+void dellast(struct circ **ph){
     if (*ph==NULL){
         printf("\nDoubly is Empty");
         return;
@@ -109,7 +109,7 @@ void dellast(struct doubly **ph){
         printf("\nLast Element Deleted Successfully");
         return;
     }
-    struct doubly *p,*t;
+    struct circ *p,*t;
     for (t=*ph ; t->next!=NULL ; t=t->next);  // traversing
     p=t->prev;    //temp pointer for storing prev node address
     p->next=NULL;  //initialising NULL to previous node
