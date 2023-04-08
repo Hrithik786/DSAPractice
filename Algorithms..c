@@ -1,52 +1,57 @@
 #include<stdio.h>
-
-
-void check(int arr[]);  //for checking wheather the array is sorted or not
-int linearsearch(int arr[], int); //declaration
-int binarysearch(int arr[], int); 
-void bubblesort(int arr[]);
-void inspace(int arr[]); //Auxilliary algorithm
+# define size 10
+void check(int []);                  //for checking wheather the array is sorted or not
+int linearsearch(int [], int);       //declaration
+int binarysearch(int [], int); 
+void bubblesort(int []);
+void inspace(int []); //Auxilliary algorithm
+int lengthof(int []); //for finding length of array
 
 int main(){
-    
     int ch,x,i;
-    int arr[10]={10,20,30,52,25,85,74,96,547,54};
-    printf("\n1.Check Wheather the array is sorted or not\n2.linear search\n3.binary search\n4.bubble sort\n5.Inspace array reversal(Auxilliary Algo)\n");
+    int arr[10] = {10,20,30,52,25,85,74,96,547,54};
+    printf("\n1.Check Wheather the array is sorted or not\n2.linear search\n3.binary search\n4.bubble sort\n5.Inspace array reversal(Auxilliary Algo)\n6.Display Array\n");
     scanf(" %d",&ch);
     do
     {
         switch (ch)
         {
-        case 1:
+            case 1:
             check(arr);
             break;
-        case 2:
-        printf("\nEnter a Element:\n");
-        scanf(" %d",&x);
-        x = linearsearch(arr,x);
-        if (x!=-1)
+
+            case 2:
+            printf("\nEnter a Element:\n");
+            scanf(" %d",&x);
+            x = linearsearch(arr,x);
+            if (x!=-1)
             printf("\nElement Found at Position: %d",x);
-        
-        break;
-
-        case 3:
-        printf("\nEnter Element:\n");
-        scanf(" %d",&x);
-        x=binarysearch(arr,x);
-        printf("\nElement found at %d Position",x);
-        break;
-
-        default:
-        printf("\nInvalid Input Try Again!!!");
+            break;
+            
+            case 3:
+            printf("\nEnter Element:\n");
+            scanf(" %d",&x);
+            x = binarysearch(arr,x);
+            printf("\nElement found at %d Position",x);
+            break;
+            
+            case 6:
+            for (int i = 0; i < lengthof(arr) ; i++)
+                printf("\n %d",arr[i]);
+            break;
+                    
+            default:
+            printf("\nInvalid Input Try Again!!!");
             break;
         }
-    } while (ch!=5);
-    
+    } while (ch!=10);
+
     return 0;
 }
-int lengthof(int arr[]){
+
+int lengthof(int arr[10]){
     int i;
-    for( i=0 ; arr[i] != '\0' ; i++ );
+    for( i = 0 ; arr[i] != '\0' ; i++ ); //frequency testing
     return i;
 }
 
@@ -61,9 +66,9 @@ void check(int arr[]){
         else if (arr[i] < arr[i+1])
            ans=1;
     }
-    printf(ans==0 ? "\nArray is Sorted" : "\nArray isn't Sorted");
+    printf(ans==1 ? "\nArray is Sorted" : "\nArray isn't Sorted");
 }
-int linearsearch(int arr[],int x){
+int linearsearch(int arr[], int x){
     for (int i = 0; i < lengthof(arr); i++)
     {
         if (arr[i]==x)
@@ -72,10 +77,11 @@ int linearsearch(int arr[],int x){
     printf("\nElement Not Found");
     return -1;
 }
-int binaryserch(int arr[],int x){
+int binarysearch(int arr[], int x){
     //array must be sorted
     int left = 0;
-    int right = lengthof(arr);
+    int right; 
+    right = lengthof(arr);
     int mid = ( left+right)/2;
     while (left < right)
     {
